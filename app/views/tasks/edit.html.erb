@@ -1,19 +1,23 @@
-<h1>タスクを編集</h1>
-<%= form_with(model: @task, local: true) do |form| %>
-  <p>
-    <%= form.label :タイトル %><br>
-    <%= form.text_field :title %>
-  </p>
-  <p>
-    <%= form.label :説明 %><br>
-    <%= form.text_area :description %>
-  </p>
-  <p>
-    <%= form.label :完了にする %><br>
-    <%= form.check_box :completed %>
-  </p>
-  <p>
-    <%= form.submit '編集完了' %>
-  </p>
+<h1 class="page-title">タスクを編集</h1>
+
+<%= form_with(model: @task, local: true, class: "task-form") do |form| %>
+  <div class="form-group">
+    <%= form.label :title, "タイトル", class: "form-label" %>
+    <%= form.text_field :title, class: "form-input", placeholder: "タスクのタイトルを入力" %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :description, "説明", class: "form-label" %>
+    <%= form.text_area :description, class: "form-textarea", placeholder: "タスクの説明を入力" %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :completed, "完了にする", class: "form-label" %>
+    <%= form.check_box :completed, class: "form-checkbox" %>
+  </div>
+
+  <div class="form-actions">
+    <%= form.submit "編集完了", class: "btn btn-primary" %>
+    <%= link_to "タスク一覧へ戻る", tasks_path, class: "btn btn-secondary" %>
+  </div>
 <% end %>
-<%= link_to 'タスク一覧へ戻る', tasks_path %>
