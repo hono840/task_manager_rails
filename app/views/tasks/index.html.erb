@@ -1,11 +1,26 @@
 <h1>タスク一覧</h1>
-<%= link_to '新しいタスクを作成', new_task_path %>
-<ul>
-  <% @tasks.each do |task| %>
-    <li>
-      <%= link_to task.title, task_path(task) %><br>
-      <%= link_to '編集', edit_task_path(task) %> |
-      <%= link_to '削除', task_path(task), data: { turbo_method: :delete, turbo_confirm: '削除してよろしいですか？' } %>
-    </li>
-  <% end %>
-</ul>
+<%= link_to '新しいタスクを作成', new_task_path, class: 'create-task-button' %>
+
+<table class="task-table">
+  <thead>
+    <tr>
+      <th>タスク名</th>
+      <th>作成日</th>
+      <th>状態</th>
+      <th>操作</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @tasks.each do |task| %>
+      <tr>
+        <td><%= link_to task.title, task_path(task) %></td>
+        <td><%= task.created_at.strftime('%Y年%m月%d日') %></td>
+        <td><%= task.completed ? '完了' : '未完了' %></td>
+        <td>
+          <%= link_to '編集', edit_task_path(task), class: 'edit-button' %>
+          <%= link_to '削除', task_path(task), data: { turbo_method: :delete, turbo_confirm: '削除してよろしいですか？' }, class: 'delete-button' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
